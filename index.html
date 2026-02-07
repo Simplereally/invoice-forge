@@ -164,6 +164,7 @@
         .forge-nav-links {
             display: flex;
             gap: var(--space-xs);
+            align-items: center;
         }
         
         .forge-nav-links a {
@@ -186,6 +187,49 @@
         
         .forge-nav-links a.active {
             color: var(--forge-ember);
+        }
+        
+        /* Pro Nav Button */
+        .nav-pro-btn {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: var(--space-xs) var(--space-md);
+            background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
+            color: var(--forge-void);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-left: var(--space-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-pro-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .nav-pro-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
         }
         
         /* ═══════════════ HEADER ═══════════════ */
@@ -600,7 +644,7 @@
             font-weight: bold;
         }
         
-        /* ═══════════════ PRO BANNER ═══════════════ */
+        /* ═══════════════ PRO BANNER (Bottom) ═══════════════ */
         
         .pro-banner {
             background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
@@ -720,6 +764,32 @@
             flex: 1;
         }
         
+        /* Pro Modal Specific */
+        .pro-price {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--forge-ember);
+            margin: var(--space-md) 0;
+        }
+        
+        .pro-price span {
+            font-size: 1rem;
+            color: var(--forge-silver);
+            font-weight: 400;
+        }
+        
+        .pro-features li {
+            color: var(--forge-chrome);
+        }
+        
+        .pro-features li::before {
+            content: '✓';
+            color: var(--forge-success);
+            font-weight: bold;
+            margin-right: var(--space-sm);
+        }
+        
         /* ═══════════════ FOOTER ═══════════════ */
         
         .forge-footer {
@@ -784,6 +854,11 @@
                 padding: var(--space-xs);
             }
             
+            .nav-pro-btn {
+                font-size: 0.65rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+            
             .line-items-table {
                 font-size: 0.85rem;
             }
@@ -846,6 +921,7 @@
                 <a href="https://simplereally.github.io/pass-forge/">Pass</a>
                 <a href="https://simplereally.github.io/color-forge/">Color</a>
                 <a href="https://simplereally.github.io/readme-forge/">Readme</a>
+                <button class="nav-pro-btn" onclick="showProModal()">⚡ Go Pro</button>
             </div>
         </div>
     </nav>
@@ -972,9 +1048,9 @@
             <div class="pro-banner">
                 <div>
                     <h4>🚀 Go Pro — Unlimited Invoices</h4>
-                    <p>Remove watermark & generate unlimited invoices</p>
+                    <p>Remove watermark, premium templates & PDF export</p>
                 </div>
-                <a href="#pro" class="btn-upgrade" onclick="showProModal()">$9/month →</a>
+                <a href="https://buy.stripe.com/cNicMY8dra3dbyV9pr1gs00" class="btn-upgrade" target="_blank">$4.99 →</a>
             </div>
         </div>
     </main>
@@ -1011,17 +1087,18 @@
     <!-- Pro Modal -->
     <div class="modal" id="proModal">
         <div class="modal-content">
-            <h3>🚀 InvoiceForge Pro</h3>
-            <p><strong>$9/month</strong> — Cancel anytime</p>
-            <ul>
-                <li>✅ Unlimited invoices</li>
-                <li>✅ No watermark on PDFs</li>
-                <li>✅ Priority support</li>
-                <li>✅ Custom logo upload (coming soon)</li>
+            <h3>⚡ InvoiceForge Pro</h3>
+            <div class="pro-price">$4.99 <span>one-time</span></div>
+            <ul class="pro-features">
+                <li>Unlimited invoices forever</li>
+                <li>No watermark on PDFs</li>
+                <li>Premium invoice templates</li>
+                <li>Priority support</li>
+                <li>Custom logo upload (coming soon)</li>
             </ul>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeProModal()">Maybe Later</button>
-                <a href="#stripe-placeholder" class="btn btn-primary" style="text-decoration:none;text-align:center;">Subscribe →</a>
+                <a href="https://buy.stripe.com/cNicMY8dra3dbyV9pr1gs00" class="btn btn-primary" style="text-decoration:none;text-align:center;" target="_blank">Upgrade — $4.99</a>
             </div>
         </div>
     </div>
